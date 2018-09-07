@@ -1,7 +1,7 @@
 const Chapter = require('../models/chapter');
 
 function chaptersIndex(req, res, next) {
-  Chapter.find()
+  Chapter.find({ project: req.params.projectId })
     .then(chapters => res.json(chapters))
     .catch(next);
 }

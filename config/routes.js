@@ -29,7 +29,7 @@ Router.route('/projects/:id')
   .delete(secureRoute, projectsController.delete);
 
 
-Router.route('/projects/:id/chapters')
+Router.route('/projects/:projectId/chapters')
   .get(chaptersController.index)
   .post(secureRoute, chaptersController.create);
 

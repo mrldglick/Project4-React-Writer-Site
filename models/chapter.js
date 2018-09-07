@@ -4,6 +4,7 @@ const chapterSchema = new mongoose.Schema({
 
   project: { type: mongoose.Schema.ObjectId, ref: 'Project' },
   title: String,
+  content: String,
   wordCount: Number,
   completed: Boolean,
   commentsEnabled: Boolean,
@@ -11,7 +12,7 @@ const chapterSchema = new mongoose.Schema({
   comments: [
     {
       addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
-      commentName: String
+      content: String
     }
   ]
 }, { timestamps: true });
