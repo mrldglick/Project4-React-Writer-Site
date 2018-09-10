@@ -11,10 +11,19 @@ const chapterSchema = new mongoose.Schema({
   imgUrl: String,
   comments: [
     {
-      addedBy: { type: mongoose.Schema.ObjectId, ref: 'User' },
+      addedBy: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
       content: String
     }
   ]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Chapter', chapterSchema);
+
+
+//
+// userSchema.pre('save', function hashPassword(next) {
+//   if(this.isModified('password')) {
+//     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
+//   }
+//   next();
+// // });

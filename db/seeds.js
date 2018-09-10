@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Project = require('../models/project');
 const Chapter = require('../models/chapter');
-const User = require('../models/user');
+const Profile = require('../models/profile');
 const { dbUri } = require('../config/environment');
 mongoose.Promise = require('bluebird');
 mongoose.connect(dbUri);
@@ -29,7 +29,7 @@ const projectData = [
     commentsEnabled: false
   }
 ];
-const userData = [
+const profileData = [
   {
     username: 'Louis',
     email: 'mrldglick@hotmail.com',
@@ -73,18 +73,18 @@ const chapterData = [
   }
 ];
 
-let _users;
+let _profiles;
 
 Chapter.collection.drop();
 Project.collection.drop();
-User.collection.drop();
-User.create(userData)
-  .then(users => {
-    _users = users;
-    console.log(`Created ${users.length} users`);
-    projectData[0].user = users[0]._id;
-    projectData[1].user = users[1]._id;
-    projectData[2].user = users[2]._id;
+Profile.collection.drop();
+Profile.create(profileData)
+  .then(profiles => {
+    _profiles = profiles;
+    console.log(`Created ${profiles.length} profiles`);
+    projectData[0].profile = profiles[0]._id;
+    projectData[1].profile = profiles[1]._id;
+    projectData[2].profile = profiles[2]._id;
     return Project.create(projectData);
   })
   .then(projects => {
@@ -92,8 +92,8 @@ User.create(userData)
     chapterData[0].project = projects[0]._id;
     chapterData[1].project = projects[0]._id;
     chapterData[2].project = projects[2]._id;
-    chapterData[1].comments[0].addedBy = _users[1]._id;
-    chapterData[1].comments[1].addedBy = _users[2]._id;
+    chapterData[1].comments[0].addedBy = _profiles[1]._id;
+    chapterData[1].comments[1].addedBy = _profiles[2]._id;
     return Chapter.create(chapterData);
   })
   .then(chapters => console.log(`created ${chapters.length} chapters`))

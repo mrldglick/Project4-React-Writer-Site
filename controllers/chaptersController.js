@@ -7,13 +7,13 @@ function chaptersIndex(req, res, next) {
 }
 
 function chaptersShow(req, res, next) {
-  Chapter.findById(req.params.id)
+  Chapter.findById(req.params.chaptersId)
     .then(chapter => res.json(chapter))
     .catch(next);
 }
 
 function chaptersUpdate(req, res, next) {
-  Chapter.findById(req.params.id)
+  Chapter.findById(req.params.chaptersId)
     .then(chapter => chapter.set(req.body))
     .then(chapter => chapter.save())
     .then(chapter => res.json(chapter))
@@ -28,7 +28,7 @@ function chaptersCreate(req, res, next) {
 }
 
 function chaptersDelete(req, res, next) {
-  Chapter.findById(req.params.id)
+  Chapter.findById(req.params.chaptersId)
     .then(chapter => chapter.remove())
     .then(() => res.sendStatus(204))
     .catch(next);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const userSchema = mongoose.Schema({
+const profileSchema = mongoose.Schema({
   username: { type: String, required: true },
   firstName: String,
   lastName: String,
@@ -11,27 +11,27 @@ const userSchema = mongoose.Schema({
 }, { timestamps: true });
 
 //Throw a validation error when duplicate emails are Created
-userSchema.plugin(require('mongoose-unique-validator'));
+profileSchema.plugin(require('mongoose-unique-validator'));
 
 
 
-userSchema.pre('save', function hashPassword(next) {
+profileSchema.pre('save', function hashPassword(next) {
   if(this.isModified('password')) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
   }
   next();
 });
 
-userSchema.methods.validatePassword = function validatePassword(password) {
+profileSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password);
 };
-// userSchema
+// profileSchema
 //   .virtual('passwordConfirmation')
 //   .set(function setPasswordConfirmation(passwordConfirmation) {
 //     this._passwordConfirmation = passwordConfirmation;
 //   });
 //
-// userSchema.pre('validate', function checkPassword(next) {
+// profileSchema.pre('validate', function checkPassword(next) {
 //   if(!this._passwordConfirmation || this._passwordConfirmation !== this.password) {
 //     this.invalidate('passwordConfirmation', 'does not match');
 //   }
@@ -39,4 +39,4 @@ userSchema.methods.validatePassword = function validatePassword(password) {
 // });
 //
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Profile', profileSchema);

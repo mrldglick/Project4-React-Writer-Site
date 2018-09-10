@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
 
-  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  profile: { type: mongoose.Schema.ObjectId, ref: 'Profile' },
   title: { type: String, required: true },
   targetWordCount: Number,
   deadline: Date,

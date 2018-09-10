@@ -7,13 +7,13 @@ function projectsIndex(req, res, next) {
 }
 
 function projectsShow(req, res, next) {
-  Project.findById(req.params.id)
+  Project.findById(req.params.projectsId)
     .then(project => res.json(project))
     .catch(next);
 }
 
 function projectsUpdate(req, res, next) {
-  Project.findById(req.params.id)
+  Project.findById(req.params.projectsId)
     .then(project => project.set(req.body))
     .then(project => project.save())
     .then(project => res.json(project))
@@ -28,7 +28,7 @@ function projectsCreate(req, res, next) {
 }
 
 function projectsDelete(req, res, next) {
-  Project.findById(req.params.id)
+  Project.findById(req.params.projectsId)
     .then(project => project.remove())
     .then(() => res.sendStatus(204))
     .catch(next);

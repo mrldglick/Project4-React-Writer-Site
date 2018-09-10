@@ -1,31 +1,31 @@
-const User = require('../models/user');
+const Profile = require('../models/profile');
 const jwt = require('jsonwebtoken');
 const { secret } = require('../config/environment');
 
 
 
 function register(req, res, next) {
-  User
+  Profile
     .create(req.body)
-    .then(user =>
-      createAndSendToken(user, res, `Greetings ${user.username}`))
+    .then(profile =>
+      createAndSendToken(profile, res, `Greetings ${profile.username}`))
     .catch(next);
 }
 
 function login(req, res, next) {
-  User
+  Profile
     .findOne({ email: req.body.email })
-    .then(user => {
-      if(!user || !user.validatePassword(req.body.password)) {
+    .then(profile => {
+      if(!profile || !profile.validatePassword(req.body.password)) {
         return res.status(401).json({ message: 'Unauthorised' });
       }
-      createAndSendToken(user, res, `Welcome back ${user.username}`);
+      createAndSendToken(profile, res, `Welcome back ${profile.username}`);
     })
     .catch(next);
 }
 // means you are logged in on registration
-function createAndSendToken(user, res, message) {
-  const token = jwt.sign({ sub: user._id, username: user.username, admin: false }, secret, { expiresIn: '5hr' });
+function createAndSendToken(profile, res, message) {
+  const token = jwt.sign({ sub: profile._id, username: profile.username, admin: false }, secret, { expiresIn: '5hr' });
   res.json({ message, token });
 }
 
