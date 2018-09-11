@@ -41,10 +41,10 @@ class App extends React.Component {
           <Route exact path="/login" component={AuthLogin} />
           <Route exact path="/register" component={AuthRegister} />
 
+          <SecureRoute path="/profiles/:id/edit" component={ProfilesEdit} />
           <Route path="/profile/:id" component={ProfilesShow} />
-          <SecureRoute path="profile/:id/edit" component={ProfilesEdit} />
           <Route exact path="/profile" component={ProfilesIndex} />
-          {/*  change the 'id's' to be uniquie to the components 
+          {/*  change the 'id's' to be uniquie to the components
           <Route exact path="/profile/:id/projects" component={ProjectsIndex} />
           <SecureRoute exact path="/profile/:id/projects/new" component={ProjectsNew} />
           <SecureRoute path="/profile/:id/projects/:id/edit" component={ProjectsEdit} />

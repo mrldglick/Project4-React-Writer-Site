@@ -13,7 +13,7 @@ class Header extends React.Component {
       <header className="navbar">
         <Link className="navbar-item" to="/">Home</Link>
 
-        {/* id has to be in `` and ${} */}
+        
         {Auth.isAuthenticated() && <Link className="navbar-item" to={`/profile/${Auth.currentProfileId()}`}>Your Profile</Link>}
         {Auth.isAuthenticated() && <Link className="navbar-item" to={`/profile/${Auth.currentProfileId()}/projects`}>Your Projects</Link>}
 

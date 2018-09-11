@@ -9,11 +9,11 @@ class ProfilesEdit extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const profileId = this.props.match.params.id;
+    const profilesId = this.props.match.params.id;
     console.log('Form submitted!', this.state);
     console.log(this.props);
-    axios.put(`/api/profiles/${profileId}`, this.state, Auth.bearerHeader())
-      .then(() => this.props.history.push(`/profiles/${profileId}`));
+    axios.put(`/api/profiles/${profilesId}`, this.state, Auth.bearerHeader())
+      .then(() => this.props.history.push(`/profiles/${profilesId}`));
   }
 
   handleChange = ({ target: { name, value }}) => {
